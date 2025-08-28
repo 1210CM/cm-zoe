@@ -1,0 +1,19 @@
+<footer class="site-footer">
+  <nav class="footer-nav">
+    <a href="{{ '/' | url }}">Inicio</a>
+    <a href="{{ '/mapa-del-sitio/' | url }}">Mapa del sitio</a>
+    <a href="{{ '/contacto/' | url }}">Contacto</a>
+    <a href="{{ '/privacidad/' | url }}">Privacidad</a>
+    <a href="{{ '/legal/' | url }}">Legal</a>
+    <a href="{{ '/feed.xml' | url }}">RSS</a>
+  </nav>
+
+  <p>© <span id="year"></span> Claudio Machado · Zoe</p>
+</footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('year');
+    if (el) el.textContent = new Date().getFullYear();
+  })();
+</script>
