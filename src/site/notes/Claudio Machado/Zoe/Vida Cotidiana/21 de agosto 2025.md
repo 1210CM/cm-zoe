@@ -13,9 +13,9 @@ Patricia cómo yo, venimos de matrimonios previos.  Y ella no se plantaba casars
 
 ## No ha pasado mucho tiempo.
 
-Apenas han pasado ocho años desde aquel hermoso día, en que todo salió muy bien, fué una ceremonia sencilla, sin mucho festejo, eramos muy pocos. En ésa época yo estaba alejado de mis amigos y familiares, así que simplemente invite a dos compañeros de trabajo que fueron mis testigos. Patricia por su lado invito a sus amigas de toda la vida, y a su madrina. Y después de la ceremonia, nos fuimos a comer a un restaurante, y allí recuerdo unas palabras que dije. Aún conservo el borrador ([[02 - Notas/Unas palabras\|02 - Notas/Unas palabras]])
+Apenas han pasado ocho años desde aquel hermoso día, en que todo salió muy bien, fué una ceremonia sencilla, sin mucho festejo, eramos muy pocos. En ésa época yo estaba alejado de mis amigos y familiares, así que simplemente invite a dos compañeros de trabajo que fueron mis testigos. Patricia por su lado invito a sus amigas de toda la vida, y a su madrina. Y después de la ceremonia, nos fuimos a comer a un restaurante, y allí recuerdo unas palabras que dije. Aún conservo el borrador ([[Claudio Machado/Zoe/Archivo/Unas palabras\|Unas palabras]])
 
-![Diferentes momentos, Patricia y Claudio en diferentes momentos de la boda, firmando, con la libreta en su poder, y Patricia junto a sus Dos amigas](/assets/fotos-cotidianas/collage-nuestra-boda.jpg) *Collage con momentos importantes*
+![Diferentes momentos, Patricia y Claudio en diferentes momentos de la boda, firmando, con la libreta en su poder, y Patricia junto a sus Dos amigas](/img/user/Claudio Machado/assets/fotos-cotidianas/collage-nuestra-boda.jpg) *Collage con momentos importantes*
 
 
 ## Contamos con un gran amigo 
