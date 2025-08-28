@@ -6,11 +6,16 @@
 ---
 {% if meta.siteBaseUrl -%}
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>{{ meta.siteName }}</title>
     <link>{{ meta.siteBaseUrl }}/</link>
     <description>{{ meta.siteDesc or meta.siteName }}</description>
+
+    <!-- Enlace al propio feed (forma recomendada en RSS usando atom:link) -->
+    <atom:link href="{{ meta.siteBaseUrl }}/feed.xml"
+               rel="self" type="application/rss+xml" />
+
     <lastBuildDate>{{ collections.note | getNewestCollectionItemDate | dateToRfc822 }}</lastBuildDate>
     <generator>Eleventy</generator>
 
@@ -18,8 +23,10 @@
       {%- set itemUrl = meta.siteBaseUrl + (note.url | url) -%}
       <item>
         <title>{{ note.data.title or note.fileSlug }}</title>
-        <link>{{ itemUrl }}</link>
+
+        <!-- Usamos GUID como permalink; omitimos <link> en el item -->
         <guid isPermaLink="true">{{ itemUrl }}</guid>
+
         <pubDate>
           {%- if note.data.updated -%}
             {{ note.data.updated | dateToRfc822 }}
@@ -27,6 +34,8 @@
             {{ note.date | dateToRfc822 }}
           {%- endif -%}
         </pubDate>
+
+        <!-- Contenido seguro dentro de CDATA -->
         <description><![CDATA[
           {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
         ]]></description>
