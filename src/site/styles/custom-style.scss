@@ -58,29 +58,42 @@ article img,
     opacity: 1 !important;
   }
 }
-/* ===== Footer: franja a todo lo ancho, sin “tarjeta” ===== */
-.site-footer {
-  position: sticky;           /* se queda abajo al hacer scroll largo */
-  bottom: 0;
-  z-index: 1000;
+/* --- Layout base para empujar el footer al fondo --- */
+html, body {
+  height: 100%;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* header + main + footer en columna */
+}
+main {
+  flex: 1 0 auto;        /* ocupa el alto disponible */
+  /* si dejaste un padding-bottom por el footer fijo, quítalo: */
+  padding-bottom: 0;
+}
 
-  /* Hacerlo full-bleed (a todo el ancho del viewport) */
+/* --- Footer: ya no fijo, full-bleed y con línea superior --- */
+.site-footer {
+  position: relative;     /* <- antes estaba sticky */
+  bottom: auto;
+  z-index: 1;
+
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 
-  background-color: #181c28;  /* un tono más oscuro que el fondo */
-  border-top: 1px solid rgba(233, 151, 63, 0.22); /* línea fina en tono naranja */
+  background-color: #181c28;
+  border-top: 1px solid rgba(233, 151, 63, 0.22);
   padding: 1rem 1.25rem;
   text-align: center;
   font-size: 0.95rem;
   color: #bbb;
 
-  box-shadow: none;           /* sin sombra de tarjeta */
-  border-radius: 0;           /* sin esquinas redondeadas */
+  box-shadow: none;
+  border-radius: 0;
 }
 
-/* ===== Enlaces ===== */
 .footer-nav {
   display: flex;
   justify-content: center;
@@ -88,9 +101,8 @@ article img,
   gap: 0.9rem 1.2rem;
   margin: 0 0 0.6rem 0;
 }
-
 .footer-nav a {
-  color: #E9973F;             /* naranja del tema */
+  color: #E9973F;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s ease, text-shadow 0.2s ease;
@@ -99,21 +111,8 @@ article img,
   color: #ffb84d;
   text-shadow: 0 0 6px rgba(233, 151, 63, 0.35);
 }
-
-/* ===== Línea de copyright ===== */
 .site-footer p {
   margin: 0;
   font-size: 0.85rem;
   color: #8e96a3;
-}
-
-/* ===== Separación inferior del contenido para que nada se tape ===== */
-main {
-  padding-bottom: 6rem; /* un poco más para móviles con teclado/gestos */
-}
-
-/* Opcional: si algún “card” padre impone bordes o sombras al footer */
-.site-footer * {
-  box-shadow: none !important;
-  border-radius: 0 !important;
 }
