@@ -61,14 +61,17 @@ article img,
 /* ===== Footer general ===== */
 .site-footer {
   position: relative;
-  z-index: 1000; /* Siempre visible y clickeable */
-  background-color: #0f0f14; /* Color del fondo del sitio */
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #181c28; /* 🔹 Fondo más oscuro, pero no negro */
+  border-top: 1px solid rgba(255, 255, 255, 0.12); /* 🔹 Línea fina separadora */
   padding: 1.2rem 1rem;
   text-align: center;
   font-size: 0.95rem;
   color: #bbb;
-  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: none; /* Quitamos el efecto de tarjeta */
 }
 
 /* ===== Contenedor de enlaces ===== */
@@ -82,7 +85,7 @@ article img,
 
 /* ===== Enlaces del footer ===== */
 .footer-nav a {
-  color: #E9973F; /* Naranja del tema */
+  color: #E9973F; /* Naranja principal */
   font-weight: 500;
   text-decoration: none;
   transition: all 0.25s ease-in-out;
