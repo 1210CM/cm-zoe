@@ -2,7 +2,7 @@
 {"dg-publish":true,"permalink":"/claudio-machado/zoe/vida-cotidiana/21-de-agosto-2025/"}
 ---
 
-# **21 de agosto 2025**
+
 
 Una fecha muy importante en mi vida. Hace ocho años, Patricia y yo, ante representantes del gobierno y algunos testigos, nos unimos en matrimonio legalmente 
 
