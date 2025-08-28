@@ -3,7 +3,7 @@
 ---
 
 
-![20250819_092412-patricia-claudio.jpg](/img/user/Claudio%20Machado/assets/fotos-cotidianas/20250819_092412-patricia-claudio.jpg)
+![Patricia y Claudio una selfie, en la cosina](/img/user/Claudio Machado/Zoe/assets/fotos-cotidianas/20250819_092412-patricia-claudio.jpg)
 ## No hay tiempo que perder
 
 Las mañanas en nuestra casa nunca son aburridas, siempre mucho que hacer, Desayuno, consideración del texto, limpieza básica y de mantenimiento, adelantar almuerzo o cena, y todo antes que Patricia se vaya a trabajar o yo salga por actividad.
