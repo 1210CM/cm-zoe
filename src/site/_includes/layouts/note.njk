@@ -12,10 +12,10 @@ permalink: "notes/{{ page.fileSlug | slugify }}/"
     {% for imp in dynamics.notes.head %}
       {% include imp %}
     {% endfor %}
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/feed.xml' | url }}">
+
   </head>
   <body class="theme-{{meta.baseTheme}} markdown-preview-view markdown-rendered markdown-preview-section {{meta.bodyClasses}}">
-   {# {% include "components/notegrowthhistory.njk" %} #}
+    {% include "components/notegrowthhistory.njk" %} 
     
     {% if settings.dgShowFileTree !== true %}
       {%include "components/navbar.njk"%}
@@ -76,18 +76,6 @@ permalink: "notes/{{ page.fileSlug | slugify }}/"
         {% include imp %}
       {% endfor %}
     </main>
-
-<footer class="site-footer">
-  <nav class="footer-nav">
-    <a href="{{ '/' | url }}">Inicio</a>
-    <a href="{{ '/mapa-del-sitio/' | url }}">Mapa del sitio</a>
-    <a href="{{ '/contacto/' | url }}">Contacto</a>
-    <a href="{{ '/privacidad/' | url }}">Privacidad</a>
-    <a href="{{ '/legal/' | url }}">Legal</a>
-    <a href="{{ '/feed.xml' | url }}" rel="alternate">RSS</a>
-  </nav>
-  <p>© {{ "now" | date("yyyy") }} Claudio Machado · Hecho con Obsidian + Digital Garden</p>
-</footer>
 
     {% if settings.dgShowBacklinks === true or settings.dgShowLocalGraph === true or settings.dgShowToc === true%}
       {%include "components/sidebar.njk"%}
