@@ -76,6 +76,18 @@ permalink: "notes/{{ page.fileSlug | slugify }}/"
       {% endfor %}
     </main>
 
+<footer class="site-footer">
+  <nav class="footer-nav">
+    <a href="{{ '/' | url }}">Inicio</a>
+    <a href="{{ '/mapa-del-sitio/' | url }}">Mapa del sitio</a>
+    <a href="{{ '/contacto/' | url }}">Contacto</a>
+    <a href="{{ '/privacidad/' | url }}">Privacidad</a>
+    <a href="{{ '/legal/' | url }}">Legal</a>
+    <a href="{{ '/feed.xml' | url }}" rel="alternate">RSS</a>
+  </nav>
+  <p>© {{ "now" | date("yyyy") }} Claudio Machado · Hecho con Obsidian + Digital Garden</p>
+</footer>
+
     {% if settings.dgShowBacklinks === true or settings.dgShowLocalGraph === true or settings.dgShowToc === true%}
       {%include "components/sidebar.njk"%}
     {% endif %}
