@@ -12,35 +12,25 @@
     <link>{{ meta.siteBaseUrl }}/</link>
     <description>{{ meta.siteDesc or meta.siteName }}</description>
 
-    <!-- Enlace al propio feed (forma recomendada en RSS usando atom:link) -->
+    <!-- URL del propio feed -->
     <atom:link href="{{ meta.siteBaseUrl }}/feed.xml"
                rel="self" type="application/rss+xml" />
 
     <lastBuildDate>{{ collections.note | getNewestCollectionItemDate | dateToRfc822 }}</lastBuildDate>
     <generator>Eleventy</generator>
 
-    {%- for note in collections.note | reverse %}
+    {%- for note in collections.note | reverse -%}
       {%- set itemUrl = meta.siteBaseUrl + (note.url | url) -%}
       <item>
         <title>{{ note.data.title or note.fileSlug }}</title>
-
-        <!-- Usamos GUID como permalink; omitimos <link> en el item -->
+        <link>{{ itemUrl }}</link>
         <guid isPermaLink="true">{{ itemUrl }}</guid>
+        <pubDate>{% if note.data.updated %}{{ note.data.updated | dateToRfc822 }}{% else %}{{ note.date | dateToRfc822 }}{% endif %}</pubDate>
 
-        <pubDate>
-          {%- if note.data.updated -%}
-            {{ note.data.updated | dateToRfc822 }}
-          {%- else -%}
-            {{ note.date | dateToRfc822 }}
-          {%- endif -%}
-        </pubDate>
-
-        <!-- Contenido seguro dentro de CDATA -->
-        <description><![CDATA[
-          {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
-        ]]></description>
+        <!-- SOLO texto plano, sin HTML, para evitar errores del parser -->
+        <description>{{ note.templateContent | striptags | escape }}</description>
       </item>
-    {%- endfor %}
+    {%- endfor -%}
   </channel>
 </rss>
-{%- endif %}
+{%- endif -%}
