@@ -4,13 +4,21 @@
   "eleventyExcludeFromCollections": true
 }
 ---
-{%if meta.siteBaseUrl %}<?xml version="1.0" encoding="utf-8"?>
+{% if meta.siteBaseUrl %}<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ meta.siteBaseUrl }}">
-    <title>{{ meta.siteName}}</title>
-    <link href="{{ meta.siteBaseUrl }}{{ permalink }}" rel="self" ////>
-    <link href="{{ meta.siteBaseUrl }}" ////>
+    <title>{{ meta.siteName }}</title>
+
+    <!-- Enlace al propio feed -->
+    <link href="{{ meta.siteBaseUrl }}{{ permalink }}" rel="self" />
+
+    <!-- Enlace a la página principal -->
+    <link href="{{ meta.siteBaseUrl }}" rel="alternate" />
+
+    <!-- Fecha de la última actualización -->
     <updated>{{ collections.notes | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
     <id>{{ meta.siteBaseUrl }}</id>
+
+    <!-- Generar entradas del feed -->
     {%- for note in collections.note | reverse %}
         <entry>
             <title>
@@ -18,12 +26,24 @@
                 {% else %}{{ note.fileSlug }}
                 {% endif %}
             </title>
-            <updated>{%if note.data.updated %}{{ note.data.updated | dateToZulu }}{%else%}{{ note.date | dateToRfc3339 }}{%endif%}</updated>
-            <id>{{ meta.siteBaseUrl }}{{note.url | url }}</id>
+
+            <updated>
+                {% if note.data.updated %}
+                    {{ note.data.updated | dateToZulu }}
+                {% else %}
+                    {{ note.date | dateToRfc3339 }}
+                {% endif %}
+            </updated>
+
+            <id>{{ meta.siteBaseUrl }}{{ note.url | url }}</id>
+
+            <!-- Contenido de la nota -->
             <content type="html">
                 {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
             </content>
-            <link href="{{ meta.siteBaseUrl }}{{note.url | url }}" ////>
+
+            <!-- Enlace directo a la nota -->
+            <link href="{{ meta.siteBaseUrl }}{{ note.url | url }}" rel="alternate" />
         </entry>
     {%- endfor %}
 </feed>
