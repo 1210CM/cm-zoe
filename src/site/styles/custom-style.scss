@@ -11,3 +11,50 @@ body {
     //   color: black;
     //  }
 }
+/* === IMG global: bordes redondeados + hover elegante === */
+main img,
+article img,
+.markdown img,
+.prose img,
+.page-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1rem auto .3rem auto;
+  border-radius: 16px; // ajusta a 8/12/20 si querés
+  box-shadow: 0 4px 10px rgba(0,0,0,.18);
+  transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+
+// Hover (solo en dispositivos con hover real)
+@media (hover:hover) {
+  main img:hover,
+  article img:hover,
+  .markdown img:hover,
+  .prose img:hover,
+  .page-content img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 24px rgba(0,0,0,.28);
+    opacity: .98;
+  }
+}
+
+// Respeta “reducir movimiento”
+@media (prefers-reduced-motion: reduce) {
+  main img,
+  article img,
+  .markdown img,
+  .prose img,
+  .page-content img {
+    transition: none !important;
+  }
+  main img:hover,
+  article img:hover,
+  .markdown img:hover,
+  .prose img:hover,
+  .page-content img:hover {
+    transform: none !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,.18) !important;
+    opacity: 1 !important;
+  }
+}
