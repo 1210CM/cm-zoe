@@ -73,46 +73,79 @@ main {
   padding-bottom: 0;
 }
 
-/* --- Footer: ya no fijo, full-bleed y con línea superior --- */
-.site-footer {
-  position: relative;     /* <- antes estaba sticky */
-  bottom: auto;
-  z-index: 1;
+/* ===== Layout base: empuja el footer al fondo ===== */
+html, body { height: 100%; }
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;      /* header + main + footer en columna */
+}
+main {
+  flex: 1 0 auto;
+  padding-bottom: 0;           /* eliminamos rellenos anteriores */
+}
 
-  width: 100vw;
+/* ===== Footer definitivo ===== */
+.site-footer{
+  position: relative;          /* el footer no es fijo */
+  bottom: auto;
+  z-index: 9999;               /* siempre sobre el gráfico */
+  isolation: isolate;          /* stacking context propio */
+  pointer-events: auto;        /* permite hacer clic en los enlaces */
+
+  width: 100vw;                /* ocupa todo el ancho */
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 
-  background-color: #181c28;
-  border-top: 1px solid rgba(233, 151, 63, 0.22);
-  padding: 1rem 1.25rem;
-  text-align: center;
-  font-size: 0.95rem;
+  background: #181c28;         /* un poco más oscuro que el fondo */
   color: #bbb;
-
+  padding: 1rem 1.25rem;
+  border-top: 1px solid rgba(233,151,63,.28); /* línea superior sutil */
+  text-align: center;
   box-shadow: none;
   border-radius: 0;
 }
 
-.footer-nav {
+/* Navegación del footer */
+.footer-nav{
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.9rem 1.2rem;
-  margin: 0 0 0.6rem 0;
+  gap: .75rem 1.25rem;
+  margin: 0 0 .55rem 0;
 }
-.footer-nav a {
-  color: #E9973F;
+
+.footer-nav a{
+  display: inline-block;
+  padding: .2rem .1rem;
+  color: #E9973F;                /* naranja del tema */
   font-weight: 500;
   text-decoration: none;
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color .2s ease, text-shadow .2s ease, transform .2s ease;
 }
-.footer-nav a:hover {
+
+.footer-nav a:hover{
   color: #ffb84d;
-  text-shadow: 0 0 6px rgba(233, 151, 63, 0.35);
+  text-shadow: 0 0 6px rgba(233,151,63,.35);
 }
-.site-footer p {
+
+.footer-nav a:focus{
+  outline: 2px solid rgba(233,151,63,.6);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Texto inferior */
+.site-footer p{
   margin: 0;
-  font-size: 0.85rem;
+  font-size: .85rem;
   color: #8e96a3;
+}
+
+/* ===== Evitar que el gráfico tape el footer ===== */
+#graph, .graph, .graph-container, .force-graph, .connected-pages{
+  position: relative;
+  z-index: 1;                  /* el gráfico queda debajo */
+  overflow: hidden;
+  margin-bottom: 1.5rem;       /* espacio visual antes del footer */
 }
