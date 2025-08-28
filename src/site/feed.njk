@@ -5,40 +5,33 @@
 }
 ---
 {% if meta.siteBaseUrl -%}
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ meta.siteBaseUrl }}">
-  <title>{{ meta.siteName }}</title>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ meta.siteName }}</title>
+    <link>{{ meta.siteBaseUrl }}/</link>
+    <description>{{ meta.siteDesc or meta.siteName }}</description>
+    <lastBuildDate>{{ collections.note | getNewestCollectionItemDate | dateToRfc822 }}</lastBuildDate>
+    <generator>Eleventy</generator>
 
-  <!-- Enlace al propio feed -->
-  <link href="{{ meta.siteBaseUrl }}{{ permalink | url }}" rel="self" />
-
-  <!-- Enlace a la portada del sitio -->
-  <link href="{{ meta.siteBaseUrl }}/" rel="alternate" />
-
-  <updated>{{ collections.note | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
-  <id>{{ meta.siteBaseUrl }}/</id>
-
-  {%- for note in collections.note | reverse %}
-    {%- set itemUrl = meta.siteBaseUrl + (note.url | url) -%}
-    <entry>
-      <title>{{ note.data.title or note.fileSlug }}</title>
-
-      <updated>
-        {%- if note.data.updated -%}
-          {{ note.data.updated | dateToRfc3339 }}
-        {%- else -%}
-          {{ note.date | dateToRfc3339 }}
-        {%- endif -%}
-      </updated>
-
-      <id>{{ itemUrl }}</id>
-      <link href="{{ itemUrl }}" rel="alternate" />
-
-      <!-- Contenido HTML como CDATA para no romper el XML -->
-      <content type="html"><![CDATA[
-        {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
-      ]]></content>
-    </entry>
-  {%- endfor %}
-</feed>
+    {%- for note in collections.note | reverse %}
+      {%- set itemUrl = meta.siteBaseUrl + (note.url | url) -%}
+      <item>
+        <title>{{ note.data.title or note.fileSlug }}</title>
+        <link>{{ itemUrl }}</link>
+        <guid isPermaLink="true">{{ itemUrl }}</guid>
+        <pubDate>
+          {%- if note.data.updated -%}
+            {{ note.data.updated | dateToRfc822 }}
+          {%- else -%}
+            {{ note.date | dateToRfc822 }}
+          {%- endif -%}
+        </pubDate>
+        <description><![CDATA[
+          {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
+        ]]></description>
+      </item>
+    {%- endfor %}
+  </channel>
+</rss>
 {%- endif %}
