@@ -4,43 +4,41 @@
   "eleventyExcludeFromCollections": true
 }
 ---
-{% if meta.siteBaseUrl %}<?xml version="1.0" encoding="utf-8"?>
+{% if meta.siteBaseUrl -%}
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ meta.siteBaseUrl }}">
   <title>{{ meta.siteName }}</title>
 
   <!-- Enlace al propio feed -->
-  <link href="{{ meta.siteBaseUrl }}{{ permalink }}" rel="self"></link>
+  <link href="{{ meta.siteBaseUrl }}{{ permalink | url }}" rel="self" />
 
   <!-- Enlace a la portada del sitio -->
-  <link href="{{ meta.siteBaseUrl }}" rel="alternate"></link>
+  <link href="{{ meta.siteBaseUrl }}/" rel="alternate" />
 
-  <updated>{{ collections.notes | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
-  <id>{{ meta.siteBaseUrl }}</id>
+  <updated>{{ collections.note | getNewestCollectionItemDate | dateToRfc3339 }}</updated>
+  <id>{{ meta.siteBaseUrl }}/</id>
 
   {%- for note in collections.note | reverse %}
-  <entry>
-    <title>
-      {% if note.title %}{{ note.title }}{% else %}{{ note.fileSlug }}{% endif %}
-    </title>
+    {%- set itemUrl = meta.siteBaseUrl + (note.url | url) -%}
+    <entry>
+      <title>{{ note.data.title or note.fileSlug }}</title>
 
-    <updated>
-      {% if note.data.updated %}
-        {{ note.data.updated | dateToZulu }}
-      {% else %}
-        {{ note.date | dateToRfc3339 }}
-      {% endif %}
-    </updated>
+      <updated>
+        {%- if note.data.updated -%}
+          {{ note.data.updated | dateToRfc3339 }}
+        {%- else -%}
+          {{ note.date | dateToRfc3339 }}
+        {%- endif -%}
+      </updated>
 
-    <id>{{ meta.siteBaseUrl }}{{ note.url | url }}</id>
+      <id>{{ itemUrl }}</id>
+      <link href="{{ itemUrl }}" rel="alternate" />
 
-    <!-- Contenido HTML envuelto en CDATA para no romper el XML -->
-    <content type="html"><![CDATA[
-      {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
-    ]]></content>
-
-    <!-- Enlace directo a la nota -->
-    <link href="{{ meta.siteBaseUrl }}{{ note.url | url }}" rel="alternate"></link>
-  </entry>
+      <!-- Contenido HTML como CDATA para no romper el XML -->
+      <content type="html"><![CDATA[
+        {{ note.templateContent | hideDataview | taggify | link | htmlToAbsoluteUrls(meta.siteBaseUrl) }}
+      ]]></content>
+    </entry>
   {%- endfor %}
 </feed>
-{% endif %}
+{%- endif %}
